@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% block title %}爬虫{% endblock %}
+{% block content %}
+    <form method="POST" action="" name="code">
+    {% csrf_token %}
+        <textarea placeholder="在此处输入股票代码，一行一个" name="code"></textarea>
+        <input type="submit" value="提交" >
+    </form>
+    <a href="download">下载表格</a>
+{% endblock %}
