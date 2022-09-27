@@ -126,7 +126,7 @@ def crawler(request):
             rqst = requests.get(url_zt, headers=headers, verify=False, timeout=2)
             pds_zt = pds.DataFrame(json.loads(rqst.text)['data']['pool'])
             pds_zt = pds_zt[['c', 'fbt', 'lbt']]
-            pds_zt.rename(columns={'c': 'code'}, inplace=True)
+            pds_zt.rename(columns={'c': 'code', 'fbt': '最早封板时间', 'lbt': '最后封板时间'}, inplace=True)
 
             rqst = requests.get(url_zd, headers=headers, verify=False, timeout=2)
             pds_zd = pds.DataFrame(json.loads(rqst.text)['data']['diff'])
@@ -139,7 +139,6 @@ def crawler(request):
             pds_last = pds.merge(pds_old, pds_zt, on='code', how='left')
             pds_last = pds.merge(pds_last, pds_zd, on='code', how='left')
             sht1.range('a1').value = pds_last
-
             wb.save('输出.xlsx')
             wb.close()
             try:

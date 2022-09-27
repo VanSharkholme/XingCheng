@@ -1,15 +1,106 @@
 body{
-    /*background-color: grey;*/
+    background-color: #012190;
 }
 
 
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 80px 30px 80px;
+}
 
+.logo{
+    width: 200px;
+    height: 60px;
+}
 
-.nav{
-    /*background-color: aliceblue;*/
-    margin: 0;
-    padding: 0;
-    /*list-style-type: none;*/
-    display: inline-block;
+.navbar-container li{
     float: left;
+    list-style-type: none;
+    margin-left: 10px;
+    margin-right: 10px;
 }
+
+.registration{
+    display: inline-block;
+}
+
+.registration a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.registration .button{
+    border-radius: 5px;
+    display: table;
+    width: 120px;
+    height: 40px;
+    /*background-color: blue;*/
+    margin-top: 5px;
+    padding: 5px;
+    line-height: 40px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    cursor: pointer;
+}
+
+#register{
+    background-color: white;
+    color: #012190;
+    /*padding: 0;*/
+}
+
+.registration ul{
+    margin: 0;
+}
+
+.button-text{
+    display: table-cell;
+    text-align: center;
+    vertical-align: center;
+}
+
+.nav-links{
+    color: white;
+    text-decoration: none;
+}
+
+.login-window-hid{
+    display: none;
+    transition: 0.5s;
+}
+
+.login-window-show{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    padding: 10px;
+    border-radius: 10px;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 100px;
+    background-color: white;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -100%);
+
+}
+
+.uid-input{
+    background: none;
+    padding: 5px;
+    border-radius: 5px;
+    border: solid 3px black;
+}
+
+/*.pwd-input{*/
+/*    background: none;*/
+/*    padding: 5px;*/
+/*    border-radius: 5px;*/
+/*    border: solid 3px black;*/
+/*}*/
+
+
