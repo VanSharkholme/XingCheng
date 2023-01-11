@@ -6,5 +6,21 @@
         <textarea placeholder="在此处输入股票代码，一行一个" name="code"></textarea>
         <input type="submit" value="提交" >
     </form>
+    {{ status }}
+    <table>
+        <tr>
+            {% for h in table.0.keys %}
+                <th>{{ h }}</th>
+            {% endfor %}
+        </tr>
+        {% for code in table.values %}
+            <tr>
+            {% for k,v in code.items %}
+                <td>{{ v }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
     <a href="download">下载表格</a>
 {% endblock %}

@@ -5,23 +5,68 @@
     {% load static %}
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+
 </head>
 <body>
-<span><a href=""><img src="{% static 'logo-500.png' %}" alt="Logo" width="30%" height="30%"></a></span>
-{#<div>#}
-    <ul class="nav">
-        <li class="nav"><a href="">app01</a> </li>
-        <li class="nav"><a href="crawler">表格</a> </li>
-{#        <li class="nav"><a href="">app01</a> </li>#}
-{#        <li class="nav"><a href="">app01</a> </li>#}
-{#        <li class="nav"><a href="">app01</a> </li>#}
-{#        <li class="nav"><a href="">app01</a> </li>#}
-    </ul>
-{#</div>#}
+
+<div class="navbar-container">
+    <div class="logo">
+        <a href=""><img src="{% static 'logo-500.png' %}" alt="Logo" class="logo"></a>
+    </div>
+    <div class="nav-links">
+        <ul class="nav-links">
+            <li class="nav-links"><a href="" class="nav-links">app01</a> </li>
+            <li class="nav-links"><a href="crawler" class="nav-links">表格</a> </li>
+            <li class="nav-links"><a href="" class="nav-links">app01</a> </li>
+            <li class="nav-links"><a href="" class="nav-links">app01</a> </li>
+            <li class="nav-links"><a href="" class="nav-links">app01</a> </li>
+            <li class="nav-links"><a href="" class="nav-links">app01</a> </li>
+        </ul>
+    </div>
+    {% if user.is_authenticated %}
+{#        <div class="registration">#}
+{#            <ul class="registration">#}
+{#                <li class="registration">#}
+{#                    <a href="logout"><div class="button" id="logout"><span class="button-text">退出登录</span></div></a>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+        <div class="profile">
+            <div class="avatar">
+{#                <img src="{{  }}">#}
+            </div>
+            <div class="username">
+                <span>{{ username }}</span>
+            </div>
+        </div>
+    {% else %}
+    <div class="registration">
+        <ul class="registration">
+            <li class="registration">
+                <a id="login"><div class="button" id="login"><span class="button-text">登录</span></div></a>
+            </li>
+            <li class="registration">
+                <a href=""><div class="button" id="register"><span class="button-text">注册</span></div></a>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
 
 <div>
     {% block content %}{% endblock %}
 </div>
 
+<div class="login-window-hid" id="lgwindow">
+
+    <form action="login/" method="post">
+        {% csrf_token %}
+        {{ login_form }}
+        <input type="submit">
+    </form>
+    {{ err_message }}
+</div>
+
 </body>
+<script src="{% static 'script.js' %}"></script>
 </html>
