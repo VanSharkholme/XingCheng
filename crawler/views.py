@@ -138,6 +138,8 @@ def crawler(request):
             pds_old = pds.merge(pds_old, pds_zj, on='code', how='left')
             pds_last = pds.merge(pds_old, pds_zt, on='code', how='left')
             pds_last = pds.merge(pds_last, pds_zd, on='code', how='left')
+            context['table'] = pds_last.to_dict('index')
+            print(context['table'])
             sht1.range('a1').value = pds_last
             wb.save('输出.xlsx')
             wb.close()
