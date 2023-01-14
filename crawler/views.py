@@ -30,16 +30,16 @@ def crawler(request):
             url_zd = 'https://74.push2.eastmoney.com/api/qt/clist/get?&pn=1&pz=8000&po=0&np=1&fltt=2&invt=2&fid=f12&fs=m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23,m:0+t:81+s:2048&fields=f12,f21'
             url_zj = 'https://push2.eastmoney.com/api/qt/clist/get?fid=f12&po=0&pz=8000&pn=1&np=1&fltt=2&invt=2&fs=m%3A0%2Bt%3A6%2Bf%3A!2%2Cm%3A0%2Bt%3A13%2Bf%3A!2%2Cm%3A0%2Bt%3A80%2Bf%3A!2%2Cm%3A1%2Bt%3A2%2Bf%3A!2%2Cm%3A1%2Bt%3A23%2Bf%3A!2%2Cm%3A0%2Bt%3A7%2Bf%3A!2%2Cm%3A1%2Bt%3A3%2Bf%3A!2&fields=f12%2Cf62'
 
-            try:
-                wb = xw.Book('输出.xlsx')
-            except FileNotFoundError:
-                app = xw.App(visible=False, add_book=True)
-                wb = app.books.add()
+            # try:
+            #     wb = xw.Book('输出.xlsx')
+            # except FileNotFoundError:
+            #     app = xw.App(visible=False, add_book=True)
+            #     wb = app.books.add()
 
-            sht1 = wb.sheets(1)
+            # sht1 = wb.sheets(1)
 
             print('开始工作')
-            sht1.clear()
+            # sht1.clear()
 
             # with open('股票池.txt', 'r', encoding='utf-8') as f:  # 获取股票池，存入temp
             #     temp = f.read()
@@ -140,15 +140,15 @@ def crawler(request):
             pds_last = pds.merge(pds_last, pds_zd, on='code', how='left')
             context['table'] = pds_last.to_dict('index')
             print(context['table'])
-            sht1.range('a1').value = pds_last
-            wb.save('输出.xlsx')
-            wb.close()
-            try:
-                app.quit()
-            except NameError:
-                # app = xw.apps.active
-                # app.quit()
-                pass
+            # sht1.range('a1').value = pds_last
+            # wb.save('输出.xlsx')
+            # wb.close()
+            # try:
+            #     app.quit()
+            # except NameError:
+            #     # app = xw.apps.active
+            #     # app.quit()
+            #     pass
             context['status'] = '运行结束'
             # context['link'] = ''
         except:
