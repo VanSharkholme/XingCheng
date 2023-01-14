@@ -103,4 +103,78 @@ body{
 /*    border: solid 3px black;*/
 /*}*/
 
+div #code_result{
+    width: 80%;
+    height: 400px;
+    overflow: scroll;
+    border: solid 5px white;
+    border-radius: 15px;
+}
 
+table#code_result{
+    width: 1800px;
+    color: white;
+    border-collapse: collapse;
+    border-radius: 15px;
+}
+
+tr #code_data_row{
+    line-height: 25px;
+}
+
+.code_data{
+    border: solid white 3px;
+
+}
+
+th.code_data{
+    position: sticky    ;
+}
+
+.bg{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+
+div#code_result::-webkit-scrollbar {
+    width: 6px;
+}
+
+div#code_result::-webkit-scrollbar:horizontal {
+    width: 6px;
+}
+
+
+div#code_result::-webkit-scrollbar-thumb:horizontal {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+    opacity: 0.2;
+    background: rgba(255,255,255,0.8);
+}
+
+div#code_result::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+    opacity: 0.2;
+    background: rgba(255,255,255,0.8);
+}
+
+div#code_result::-webkit-scrollbar-track:horizontal {
+    -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.3);
+}
+
+  div#code_result::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.3);
+  }
+
+
+div#code_result::-webkit-scrollbar-corner{
+      display: none;
+}
