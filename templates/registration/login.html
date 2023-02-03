@@ -1,10 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  {% load static %}
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+  ></script>
+  <script src="https://kit.fontawesome.com/650fc010f2.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{% static 'lg-reg-style.css' %}">
+  <title>注册和登录表单</title>
 </head>
 <body>
+{% load static %}
+<div class="container">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <form action="{% url 'login' %}" class="sign-in-form" method="post">
+        {% csrf_token %}
+        <h2 class="title">登录</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          {#                    <input type="text" placeholder="用户名" name="username">#}
+          {#          {{ form.username }}#}
+          <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150"
+                 required="" id="id_username">
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          {#                    <input type="password" placeholder="密码" name="pwd">#}
+          {#          {{ form.password }}#}
+          <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+        </div>
+        <input type="submit" value="登 录" class="btn solid"/>
 
+      </form>
+      <form action="/register/" class="sign-up-form" method="post">
+        {% csrf_token %}
+        <h2 class="title">注册</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="用户名" name="username">
+        </div>
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input type="email" placeholder="邮箱" name="email">
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="密码" name="pwd">
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="重复密码" name="pwd_confirm">
+        </div>
+        <div class="input-field">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <input type="text" placeholder="手机" name="phone">
+        </div>
+        <input type="submit" class="btn" value="注 册"/>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>新用户?</h3>
+        <p>
+          好兄弟,你来了,我们的网站就差你的加入了,点击下方注册按钮加入我们吧!!
+
+        </p>
+        <button class="btn transparent" id="sign-up-btn">
+          注册
+        </button>
+      </div>
+      <img src="{% static "img/log.svg" %}" class="image" alt=""/>
+    </div>
+    <div class="panel right-panel">
+      <div class="content">
+        <h3>已经是我们自己人了吗?</h3>
+        <p>
+          那好兄弟,你直接点击登录按钮,登录到我们这优秀的系统里!!
+        </p>
+        <button class="btn transparent" id="sign-in-btn">
+          登 录
+        </button>
+      </div>
+      <img src="{% static "img/register.svg" %}" class="image" alt=""/>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'app.js' %}"></script>
 </body>
 </html>

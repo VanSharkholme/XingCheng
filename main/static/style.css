@@ -1,5 +1,9 @@
 body{
-    background-color: #012190;
+    height: 1000px;
+    border-radius: 50%;
+    background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+    overflow: hidden;
+
 }
 
 
@@ -48,7 +52,7 @@ body{
 
 #register{
     background-color: white;
-    color: #012190;
+    color: #269EF4;
     /*padding: 0;*/
 }
 
@@ -168,7 +172,7 @@ div#code_result::-webkit-scrollbar-track:horizontal {
     background: rgba(255,255,255,0.3);
 }
 
-  div#code_result::-webkit-scrollbar-track{
+div#code_result::-webkit-scrollbar-track{
     -webkit-box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     background: rgba(255,255,255,0.3);
