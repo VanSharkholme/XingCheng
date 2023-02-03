@@ -5,13 +5,15 @@
     {% load static %}
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
-
+    <link href="{% static "node_modules/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <script src="{% static "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
+{#    <script src="https://unpkg.com/cropperjs@next"></script>#}
 </head>
 <body>
-
+{% load static %}
 <div class="navbar-container">
     <div class="logo">
-        <a href=""><img src="{% static 'logo-500.png' %}" alt="Logo" class="logo"></a>
+        <a href="/"><img src="{% static 'logo-500.png' %}" alt="Logo" class="logo"></a>
     </div>
     <div class="nav-links">
         <ul class="nav-links">
@@ -33,20 +35,27 @@
 {#        </div>#}
         <div class="profile">
             <div class="avatar">
-{#                <img src="{{  }}">#}
+                <a href="/accounts/profile"><img src="{{ user.profile.Avatar.url }}" class="rounded-circle" style="height: 50px;width: 50px;"></a>
             </div>
             <div class="username">
-                <span>{{ username }}</span>
+                <span>{{ user.username }}</span>
+                <div class="registration">
+                    <ul class="registration">
+                        <li>
+                            <a id="logout" href="logout/"><div class="button" id="logout"><span class="button-text">退出</span></div></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     {% else %}
     <div class="registration">
         <ul class="registration">
             <li class="registration">
-                <a id="login"><div class="button" id="login"><span class="button-text">登录</span></div></a>
+                <a id="login" href="/accounts/login/"><div class="button" id="login"><span class="button-text">登录</span></div></a>
             </li>
             <li class="registration">
-                <a href=""><div class="button" id="register"><span class="button-text">注册</span></div></a>
+                <a id="register" href="accounts/signup/"><div class="button" id="register"><span class="button-text">注册</span></div></a>
             </li>
         </ul>
     </div>
@@ -55,16 +64,6 @@
 
 <div>
     {% block content %}{% endblock %}
-</div>
-
-<div class="login-window-hid" id="lgwindow">
-
-    <form action="login/" method="post">
-        {% csrf_token %}
-        {{ login_form }}
-        <input type="submit">
-    </form>
-    {{ err_message }}
 </div>
 
 </body>

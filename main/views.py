@@ -1,7 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
+from django.urls import reverse
+import os
+from .forms import LoginForm, RegisterForm
 from .models import User
+
+
 # Create your views here.
 
 
@@ -11,12 +15,20 @@ def home(request):
         user = User.objects.get(username=username)
         return render(request, 'home.html', {'user': user})
     else:
-        form = LoginForm()
-        return render(request, 'home.html', {'login_form': form})
+        return render(request, 'home.html', )
+
+
+def login_page(request):
+    return render(request, 'registration/login.html', {'btn': 'login'})
+
+
+def signup_page(request):
+    return render(request, 'registration/login.html', {'btn': 'signup'})
 
 
 def userlogin(request):
-    form = LoginForm()
+    lg_form = LoginForm()
+    rg_form = RegisterForm()
     if request.method == 'POST':
         username = request.POST['username']
         pwd = request.POST['pwd']
@@ -27,7 +39,8 @@ def userlogin(request):
         else:
             context = {'err_message': 'login failed'}
             return render(request, 'home.html', context)
-    return render(request, 'home.html', {'login_form': form})
+    else:
+        return render(request, 'home.html', {'login_form': lg_form, 'register_form': rg_form})
 
 
 def userlogout(request):
@@ -35,21 +48,68 @@ def userlogout(request):
     return redirect('/')
     # pass
 
+
 # django register view
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             email = form.cleaned_data['email']
-#             user = User.objects.create_user(username=username, password=password, email=email)
-#             user.save()
-#             return HttpResponseRedirect(reverse('login'))
-#     else:
-#         form = RegisterForm()
-#     return render(request, 'register.html', {'register_form': form})
-#
+def register(request):
+    if request.method == 'POST':
+        rg_form = RegisterForm(request.POST)
+        if rg_form.is_valid():
+            username = rg_form.cleaned_data['username']
+            password = rg_form.cleaned_data['pwd']
+            email = rg_form.cleaned_data['email']
+            user = User.objects.create_user(username=username, password=password, email=email)
+            user.save()
+            return HttpResponseRedirect('/accounts/login/')
+    else:
+        lg_form = LoginForm()
+        rg_form = RegisterForm()
+    return render(request, 'home.html', {'login_form': lg_form, 'register_form': rg_form})
 
 
+def profile(request):
+    context = {}
+    if request.user.is_authenticated:
+        username = request.user.get_username()
+        user = User.objects.get(username=username)
+        context['user'] = user
+        context['avatar'] = user.profile.Avatar.url
+        return render(request, 'registration/profile.html', context)
+    else:
+        return redirect('/')
+
+
+def profile_change(request):
+    # print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    if request.method == 'POST':
+        print(request.POST)
+        # print(request.FILES)
+        username = request.user.get_username()
+        user = User.objects.get(username=username)
+
+        if 'avatar' in request.FILES:
+            new_avatar = request.FILES['avatar']
+            avatar_path = 'avatar/' + user.username + '.png'
+            p = 'media/' + avatar_path
+            with open(p, 'wb+') as avatar:
+                avatar.write(new_avatar.read())
+                pass
+            user.profile.Avatar = avatar_path
+            # print(user.profile.Avatar)
+
+        if 'username' in request.POST:
+            new_username = request.POST['username']
+            user.username = new_username
+
+        if 'email' in request.POST:
+            new_email = request.POST['email']
+            user.email = new_email
+
+        if 'intro' in request.POST:
+            new_intro = request.POST['intro']
+            user.profile.Intro = new_intro
+
+        user.profile.save()
+        user.save()
+        return redirect('/accounts/profile')
+    pass
