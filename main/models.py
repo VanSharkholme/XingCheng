@@ -35,7 +35,8 @@ class Profile(models.Model):
 
     Avatar = models.ImageField(
         upload_to='avatar/',
-        verbose_name='头像'
+        verbose_name='头像',
+        default='/media/avatar/Star for Van-500.png',
     )
 
     Balance = models.DecimalField(

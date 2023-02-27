@@ -24,7 +24,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['558cz61274.goho.co', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'crawler.apps.CrawlerConfig',
+    'poll.apps.PollConfig',
 ]
 
 MIDDLEWARE = [
@@ -126,8 +127,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     # BASE_DIR / "static",
-    'main/static',
+    os.path.join(BASE_DIR, 'main/static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
 
@@ -136,4 +138,4 @@ MEDIA_URL = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://558cz61274.goho.co']
+CSRF_TRUSTED_ORIGINS = ['https://558cz61274.goho.co', 'http://8.130.35.18']

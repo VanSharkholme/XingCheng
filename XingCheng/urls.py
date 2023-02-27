@@ -31,7 +31,7 @@ urlpatterns = [
     path('register/', views.register),
     path('loginpage/', views.login_page),
     path('signuppage/', views.signup_page),
+    path('poll/', include('poll.urls')),
     re_path(r'media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('', RedirectView.as_view(url='accounts/login', permanent=False)),
-
 ]
