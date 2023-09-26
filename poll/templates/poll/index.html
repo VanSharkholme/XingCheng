@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>poll</title>
+    {% load static %}
+    <link href="{% static "node_modules/bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<h1>POLL TOPICS</h1>
+<div>
+    {% block topic_lists %}{% endblock %}
+    {% block details %}{% endblock %}
+</div>
+{% block script %}{% endblock %}
+</div>
+</body>
+</html>

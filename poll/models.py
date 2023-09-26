@@ -28,6 +28,11 @@ class Topic(models.Model):
         max_length=200,
     )
 
+    details = models.TextField(
+        verbose_name="详细内容",
+        max_length=500,
+    )
+
     type = models.CharField(
         verbose_name="选项类型",
         choices=TYPE_CHOICES,

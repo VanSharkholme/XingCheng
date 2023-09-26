@@ -1,0 +1,9 @@
+{% extends 'poll/index.html' %}
+{% block topic_lists %}
+  <ul>
+    {% for topic in topics %}
+      <a href="/poll/{{ topic.id }}"><li>{{ topic.content }}</li></a>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

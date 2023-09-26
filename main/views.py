@@ -1,11 +1,13 @@
 import sys
 
+import django.contrib.auth.models
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 import os
 from .forms import LoginForm, RegisterForm
 from .models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
@@ -75,8 +77,12 @@ def profile(request):
         username = request.user.get_username()
         user = User.objects.get(username=username)
         context['user'] = user
-        context['avatar'] = user.profile.Avatar.url
-        return render(request, 'registration/profile.html', context)
+        try:
+            context['avatar'] = user.profile.Avatar.url
+            return render(request, 'registration/profile.html', context)
+        except ObjectDoesNotExist:
+            return render(request, 'registration/profile.html', context)
+            pass
     else:
         return redirect('/')
 

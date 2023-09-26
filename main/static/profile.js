@@ -48,3 +48,10 @@ btn_for_intro.addEventListener('click', function () {
         this.innerText = '修改';
     }
 })
+
+if(profile == null){
+
+    noprofile_modal = document.getElementById("noprofile");
+    console.log(noprofile_modal)
+    noprofile_modal.style.display = "block";
+}

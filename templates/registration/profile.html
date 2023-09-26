@@ -9,7 +9,13 @@
   <link href="{% static "cropper.css" %}" rel="stylesheet">
   <script src="{% static "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
   <script src="{% static "cropper.js" %}"></script>
-
+  <script>
+      if ({{ user.profile. }}) {
+          profile = {{ user.profile }};
+      } else {
+          profile = null;
+      }
+  </script>
 </head>
 <body>
 <button class="btn btn-link btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
@@ -68,6 +74,7 @@
                      alt="avatar" style="height: 70px;width: 70px;">
                 <input type="file" class="visually-hidden" id="input" name="image" accept="image/*">
               </label>
+{#              剪切头像弹出框           #}
               <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
                    aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -97,7 +104,25 @@
                 </div>
               </div>
             </div>
-
+{#          首次登录弹窗        #}
+            <div class="modal fade" id="noprofile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label" for="username">用户名</label>
